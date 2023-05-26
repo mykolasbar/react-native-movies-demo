@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Image, Dimensions, Text, View, Overlay } from 'react-native';
 import YoutubeIframe from 'react-native-youtube-iframe';
-import WhiteText from './WhiteText';
+import TextColorSwitcher from './TextColorSwitcher';
 
 const Player = (props) => {
     return (
         <View style = {{position:'absolute', left: 0, right: 0, top: 0, zIndex:20, backgroundColor:'rgba(0,0,0,0.5)', height: Dimensions.get('window').height}} contentFit={'contain'}>
             <View style = {{marginTop:100}}>
-                <WhiteText style = {{padding:15, textAlign:'right'}} onPress={()=>{props.closeModal('player')}}>X</WhiteText>
+                <TextColorSwitcher style = {{padding:15, textAlign:'right'}} onPress={()=>{props.closeModal('player')}}>X</TextColorSwitcher>
                 <YoutubeIframe width = {Dimensions.get('window').width} height = {200} videoId = {props.videoId}/>
             </View>
         </View>

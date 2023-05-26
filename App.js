@@ -11,8 +11,9 @@ import HighestRated from './components/HighestRated';
 import FullCategoryScreen from './screens/FullCategoryScreen';
 import FullPoster from './components/FullPoster';
 import Profile from './screens/Profile';
+import Search from './screens/Search';
 import Menu from './components/Menu';
-import WhiteText from './components/WhiteText';
+import TextColorSwitcher from './components/TextColorSwitcher';
 import { UserContext, UserProvider } from './components/UserContext.js';
 import { ThemeContext, ThemeProvider } from './components/ThemeContext';
 
@@ -35,9 +36,10 @@ export default function App() {
             <Stack.Screen name="FullPoster" component={FullPoster}/>
             <Stack.Screen name="Menu" component={Menu}/>
             <Stack.Screen name="Profile" component={Profile}/>
+            <Stack.Screen name="Search" component={Search}/>
           </Stack.Navigator>
         </NavigationContainer>
-        <WhiteText />
+        <TextColorSwitcher />
       </UserProvider>
     </ThemeProvider>
   );

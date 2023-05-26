@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Text } from 'react-native';
 import { ThemeContext } from './ThemeContext';
 
-const WhiteText = ({style, children, onPress}) => {
+const TextColorSwitcher = ({style, children, onPress}) => {
     let theme = useContext(ThemeContext)
     let textStyle = {...style, color: theme.getColorTheme() === 'light' ? 'black' : 'white'}
 
@@ -13,5 +13,5 @@ const WhiteText = ({style, children, onPress}) => {
     );
 };
 
-export default WhiteText;
+export default TextColorSwitcher;
   

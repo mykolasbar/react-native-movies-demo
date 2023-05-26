@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image, Dimensions, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-web';
-import WhiteText from './WhiteText';
+import TextColorSwitcher from './TextColorSwitcher';
 import Styles from '../assets/styles';
 
 

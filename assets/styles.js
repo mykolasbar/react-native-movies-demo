@@ -113,6 +113,10 @@ const Styles = StyleSheet.create({
     IMDBLogo: {
       height:20, 
       width:60
+    },
+    menuLogo: {
+      height:50,
+      width:50,
     }
   });
 

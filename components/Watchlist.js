@@ -3,7 +3,7 @@ import { Text, View, Pressable, ScrollView, Image } from 'react-native';
 import { UserContext } from './UserContext'
 import { ThemeContext } from './ThemeContext';
 import Styles from '../assets/styles';
-import WhiteText from './WhiteText';
+import TextColorSwitcher from './TextColorSwitcher';
 
 const Watchlist = () => {
     let user = useContext(UserContext)
@@ -14,7 +14,7 @@ const Watchlist = () => {
         <ScrollView horizontal={true} style = {Styles.browseRows}>
         {watchlist.map((movie, index) => 
             <View key = {index} style = {Styles.browseComponent}> 
-                <WhiteText style = {Styles.browseHeading}>{movie.original_title}</WhiteText>
+                <TextColorSwitcher style = {Styles.browseHeading}>{movie.original_title}</TextColorSwitcher>
                 <Image
                     style={Styles.image}
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

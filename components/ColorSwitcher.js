@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Pressable, ScrollView, Image } from 're
 import { UserContext } from './UserContext'
 import { ThemeContext } from './ThemeContext';
 import Styles from '../assets/styles';
-import WhiteText from './WhiteText';
+import TextColorSwitcher from './TextColorSwitcher';
 
 const ColorSwitcher = () => {
     let theme = useContext(ThemeContext)
@@ -12,10 +12,10 @@ const ColorSwitcher = () => {
         <View style = {{flexDirection:'row'}}>
             <View>
                 <View style = {{height:36, paddingRight:10}}>
-                    <WhiteText>Dark</WhiteText>
+                    <TextColorSwitcher>Dark</TextColorSwitcher>
                 </View>
                 <View style = {{height:36, paddingRight:10}}>
-                    <WhiteText>Light</WhiteText>
+                    <TextColorSwitcher>Light</TextColorSwitcher>
                 </View>
             </View>
             <View style = {{flexDirection:'column', backgroundColor:'#7ba5e8', width:36, height:66, alignItems:'center', justifyContent:'center'}}>

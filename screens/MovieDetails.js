@@ -4,7 +4,7 @@ import Styles from '../assets/styles';
 import FullPoster from '../components/FullPoster';
 // import YoutubeIframe from 'react-native-youtube-iframe';
 import Player from '../components/Player';
-import WhiteText from '../components/WhiteText.js';
+import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu';
 import { UserContext } from '../components/UserContext';
 import { ThemeContext } from '../components/ThemeContext.js';
@@ -58,7 +58,7 @@ const MovieDetails = ({navigation, route}) => {
         {showPlayer ? <Player videoId = {firstTrailer.key} closeModal = {closeModal}/> : null}
         <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]} horizontal={false}>
           <View style = {Styles.movieScreenContainer}>
-            <WhiteText style = {Styles.movieDetailsHeader}>{movieDetails.original_title}</WhiteText>
+            <TextColorSwitcher style = {Styles.movieDetailsHeader}>{movieDetails.original_title}</TextColorSwitcher>
             <View style = {{flexDirection:'row'}}>
               <TouchableOpacity onPress={() => {setShowFullPoster(true)}} style = {{paddingBottom:8}}>
               <Image
@@ -67,17 +67,17 @@ const MovieDetails = ({navigation, route}) => {
               />
               </TouchableOpacity>
               <View style={{flexDirection:'column', flex:1, paddingHorizontal:10}}>
-                <WhiteText style = {Styles.movieDetailsItem}>Year: <WhiteText style = {{fontWeight:'bold'}}>{year}</WhiteText></WhiteText>
-                <WhiteText style = {Styles.movieDetailsItem}>Average evaluation: <WhiteText style = {{fontWeight:'bold'}}>{movieDetails.vote_average}</WhiteText></WhiteText>
-                <WhiteText style = {Styles.movieDetailsItem}>Genres: {genres.map((genre, index) => <WhiteText  key = {genre.id} style = {{fontWeight:'bold'}}>{genre.name}{index === genres.length-1 ? '' : '/'}</WhiteText>)}</WhiteText>
-                <WhiteText style = {Styles.movieDetailsItem}>Runtime: <WhiteText style = {{fontWeight:'bold'}}>{convertRuntime(movieDetails.runtime)}</WhiteText></WhiteText>
+                <TextColorSwitcher style = {Styles.movieDetailsItem}>Year: <TextColorSwitcher style = {{fontWeight:'bold'}}>{year}</TextColorSwitcher></TextColorSwitcher>
+                <TextColorSwitcher style = {Styles.movieDetailsItem}>Average evaluation: <TextColorSwitcher style = {{fontWeight:'bold'}}>{movieDetails.vote_average}</TextColorSwitcher></TextColorSwitcher>
+                <TextColorSwitcher style = {Styles.movieDetailsItem}>Genres: {genres.map((genre, index) => <TextColorSwitcher  key = {genre.id} style = {{fontWeight:'bold'}}>{genre.name}{index === genres.length-1 ? '' : '/'}</TextColorSwitcher>)}</TextColorSwitcher>
+                <TextColorSwitcher style = {Styles.movieDetailsItem}>Runtime: <TextColorSwitcher style = {{fontWeight:'bold'}}>{convertRuntime(movieDetails.runtime)}</TextColorSwitcher></TextColorSwitcher>
                 <TouchableOpacity onPress = {()=>{openURL(movieDetails.imdb_id)}} style = {Styles.movieDetailsItem}>
                   <Image style = {Styles.IMDBLogo} source = {require('../assets/IMDB_Logo_2016.svg.png')} />
                 </TouchableOpacity>
-                <WhiteText style = {{fontWeight:'bold', paddingTop: 20}} onPress={() => {setShowPlayer(true)}}>View Trailer</WhiteText>
+                <TextColorSwitcher style = {{fontWeight:'bold', paddingTop: 20}} onPress={() => {setShowPlayer(true)}}>View Trailer</TextColorSwitcher>
               </View>
             </View>
-            <View style={{flex:1}}><WhiteText style = {Styles.movieDetailsItem}>{movieDetails.overview}</WhiteText></View>
+            <View style={{flex:1}}><TextColorSwitcher style = {Styles.movieDetailsItem}>{movieDetails.overview}</TextColorSwitcher></View>
             <Pressable
               style = {Styles.addToWatchlistButton}
               onPress={() => {inWatchlist === false ? (user.addToWatchlist(movieDetails), setInWatchlist(true)) : (console.log(movieDetails.id), user.removeFromWatchlist(movieDetails.id), setInWatchlist(false))}}

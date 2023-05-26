@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { Text, View, Pressable, Image, ScrollView, Dimensions } from 'react-native';
 import Styles from '../assets/styles';
-import WhiteText from './WhiteText';
+import TextColorSwitcher from './TextColorSwitcher';
 
 export default function BrowseMoviesCategory({navigation, query}) {
     let [movies, setMovies] = useState([])
@@ -16,7 +16,7 @@ export default function BrowseMoviesCategory({navigation, query}) {
         <ScrollView horizontal = {true} style = {Styles.browseRows}>
             {movies.map((movie, index) => 
                 <View key = {movie.id} style = {Styles.browseComponent}> 
-                    <WhiteText style = {Styles.browseHeading}>{movie.original_title}</WhiteText>
+                    <TextColorSwitcher style = {Styles.browseHeading}>{movie.original_title}</TextColorSwitcher>
                     <Image
                         style={Styles.image}
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

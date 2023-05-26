@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext }  from 'react';
-import { StyleSheet, Text, View, Pressable, Image, ScrollView, FlatList, Dimensions } from 'react-native';
+import { Text, View, Pressable, Image, ScrollView } from 'react-native';
 import Styles from '../assets/styles';
-import WhiteText from '../components/WhiteText.js';
+import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu.js';
 import { ThemeContext } from '../components/ThemeContext.js';
 
@@ -26,7 +26,7 @@ export default function FullCategoryScreen({navigation, route}) {
         <>
             <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]}>
                 <View style = {{paddingBottom:20}}>
-                    <View style = {{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}><WhiteText style = {{fontSize: 25, fontWeight: 300, color: "white", paddingBottom: 8}}>{route.params.title}</WhiteText><WhiteText>Page: {page}</WhiteText></View>
+                    <View style = {{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}><TextColorSwitcher style = {{fontSize: 25, fontWeight: 300, color: "white", paddingBottom: 8}}>{route.params.title}</TextColorSwitcher><TextColorSwitcher>Page: {page}</TextColorSwitcher></View>
                     <View style = {{flexDirection: "row", flexWrap: "wrap"}}>
                     {movies.map((movie, index) => 
                         <View style = {Styles.fulCategoryComponent} key = {movie.id}> 
@@ -36,17 +36,17 @@ export default function FullCategoryScreen({navigation, route}) {
                                 resizeMethod={'auto'}
                             />
                             <View style = {{flexDirection:'column'}}>
-                                <WhiteText style = {{fontWeight:'bold', height:40, paddingTop:5}}>{movie.original_title}</WhiteText>
+                                <TextColorSwitcher style = {{fontWeight:'bold', height:40, paddingTop:5}}>{movie.original_title}</TextColorSwitcher>
                                 {route.params.query == 'now_playing' ? 
-                                <WhiteText >Released: <Text style={{fontWeight:'bold'}}>{movie.release_date}</Text></WhiteText> :                        
-                                <WhiteText>Year: <Text style={{fontWeight:'bold'}}>{getYear(movie.release_date)}</Text></WhiteText>}
+                                <TextColorSwitcher >Released: <Text style={{fontWeight:'bold'}}>{movie.release_date}</Text></TextColorSwitcher> :                        
+                                <TextColorSwitcher>Year: <Text style={{fontWeight:'bold'}}>{getYear(movie.release_date)}</Text></TextColorSwitcher>}
                                 {route.params.query == 'top_rated' ? 
                                 <View>
-                                    <WhiteText>Average rating: <Text style={{color: theme.getColorTheme() === 'dark' ? 'yellow' : 'blue', fontWeight:'bold'}}>{movie.vote_average}</Text></WhiteText>
-                                    <WhiteText>Popularity index: <Text style={{color:'green', fontWeight:'bold'}}>{'\n'}{movie.popularity}</Text></WhiteText>
+                                    <TextColorSwitcher>Average rating: <Text style={{color: theme.getColorTheme() === 'dark' ? 'yellow' : 'blue', fontWeight:'bold'}}>{movie.vote_average}</Text></TextColorSwitcher>
+                                    <TextColorSwitcher>Popularity index: <Text style={{color:'green', fontWeight:'bold'}}>{'\n'}{movie.popularity}</Text></TextColorSwitcher>
                                 </View> :null}
                                 {route.params.query == 'popular' ? 
-                                <WhiteText style = {{height:40, paddingTop:5}}>Popularity index: <Text style={{color:'green', fontWeight:'bold'}}>{'\n'}{movie.popularity}</Text></WhiteText>
+                                <TextColorSwitcher style = {{height:40, paddingTop:5}}>Popularity index: <Text style={{color:'green', fontWeight:'bold'}}>{'\n'}{movie.popularity}</Text></TextColorSwitcher>
                                 : null}
                                 <Pressable
                                     style={[Styles.showMoreButton, {marginVertical:10, width: 150}]}
