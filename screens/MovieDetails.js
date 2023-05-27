@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext }  from 'react';
 import { Text, View, Button, Image, Dimensions, TouchableOpacity, ScrollView, Linking, Pressable } from 'react-native';
 import Styles from '../assets/styles';
 import FullPoster from '../components/FullPoster';
-// import YoutubeIframe from 'react-native-youtube-iframe';
 import Player from '../components/Player';
 import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu';
@@ -14,14 +13,14 @@ const MovieDetails = ({navigation, route}) => {
     let theme = useContext(ThemeContext)
     let watchlist = user.getWatchlist()
 
-    let [movieDetails, setMovieDetails] = useState({})
-    let [showFullPoster, setShowFullPoster] = useState(false)
-    let [videos, setVideos] = useState([])
-    let [showPlayer, setShowPlayer] = useState(false)
-    let [firstTrailer, setFirstTrailer] = useState({})
-    let [genres, setGenres] = useState([])
-    let [year, setYear] = useState()
-    let [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
+    const [movieDetails, setMovieDetails] = useState({})
+    const [showFullPoster, setShowFullPoster] = useState(false)
+    const [videos, setVideos] = useState([])
+    const [showPlayer, setShowPlayer] = useState(false)
+    const [firstTrailer, setFirstTrailer] = useState({})
+    const [genres, setGenres] = useState([])
+    const [year, setYear] = useState('')
+    const [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
 
     let closeModal = (type) => {
         type === 'player' && showPlayer ? setShowPlayer(false) : null
@@ -29,15 +28,22 @@ const MovieDetails = ({navigation, route}) => {
     }
 
     let openURL = (url) => {
-      Linking.openURL(`https://www.imdb.com/title/${url}`).catch((err) => console.error('An error occurred', err));
+        Linking.openURL(`https://www.imdb.com/title/${url}`).catch((err) => console.error('An error occurred', err));
     }
 
     useEffect(() => {
+        // const dataFetch = async () => {
+        //     const data = await (await fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)).json();
+
+        // setMovieDetails(data);
+        // setYear(data.release_date.split('-')[0])
+        // setGenres(data.genres)
+        // }
+        
+        // dataFetch()
       fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)
-      .then(response => response.json())
-      .then(result => setMovieDetails(movieDetails = result))
-      .then(() => setGenres(movieDetails.genres))
-      .then(() => setYear(movieDetails.release_date.split('-')[0]))
+      .then((response) => response.json())
+      .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0])})
     }, []);
 
     useEffect(() => {
@@ -51,6 +57,14 @@ const MovieDetails = ({navigation, route}) => {
       minutes = minutes % 60
       return hours + ' h. ' + minutes + ' m.'
     }
+
+    // let getYear = (date) => {
+    //   date.split('')
+    //   movieDetails.title.split(' ')
+    //   setYear(date)
+    //   return year
+    //   console.log(date)
+    // }
 
     return (
       <>

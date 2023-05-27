@@ -8,7 +8,7 @@ const Menu = ({navigation, route}) => {
     let user = useContext(UserContext)
 
     return (
-        <View style = {{width: Dimensions.get('window').width, backgroundColor: '#181926', flexDirection:'row', padding:5, justifyContent:'space-between'}}>
+        <View style = {{width: Dimensions.get('window').width, backgroundColor: '#181926', flexDirection:'row', padding:12, justifyContent:'space-between'}}>
             {/* <Text style = {{color:'white', padding:10}} onPress={() => navigation.navigate('Profile')}>{user.getUserName()}</Text> */}
             <TouchableOpacity onPress={() => navigation.navigate('Browse')}>
                 <Image style = {Styles.menuLogo} source = {require('../assets/menu-icon.png')} />

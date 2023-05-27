@@ -1,10 +1,10 @@
 import React, { useState, useEffect }  from 'react';
-import { Text, View, Pressable, Image, ScrollView, Dimensions } from 'react-native';
+import { Text, View, Pressable, Image, ScrollView } from 'react-native';
 import Styles from '../assets/styles';
 import TextColorSwitcher from './TextColorSwitcher';
 
 export default function BrowseMoviesCategory({navigation, query}) {
-    let [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([])
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${query}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US`)

@@ -8,9 +8,9 @@ import { ThemeContext } from '../components/ThemeContext.js';
 
 export default function Home({navigation, route}) {
 
-  let [userName, setUserName] = useState('')
-  let [password, setPassword] = useState('')
-  let [showNotif, setShowNotif] = useState(false)
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [showNotif, setShowNotif] = useState(false)
 
   let user = useContext(UserContext)
   let theme = useContext(ThemeContext)

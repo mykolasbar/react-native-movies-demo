@@ -6,16 +6,16 @@ import Menu from '../components/Menu.js';
 import { ThemeContext } from '../components/ThemeContext.js';
 
 export default function FullCategoryScreen({navigation, route}) {
-    let [movies, setMovies] = useState([])
-    let [page, setPage] = useState(1)
-    let [totalPages, setTotalPages] = useState()
+    const [movies, setMovies] = useState([])
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState()
 
     let theme = useContext(ThemeContext)
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${route.params.query}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US&page=${page}`)
         .then(response => response.json())
-        .then((result) => {setTotalPages(result.total_pages); setMovies(movies = result.results)})
+        .then((result) => {setTotalPages(result.total_pages); setMovies(result.results)})
     }, [page]);
 
     let getYear = (date) => {

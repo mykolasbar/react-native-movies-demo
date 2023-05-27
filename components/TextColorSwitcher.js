@@ -7,11 +7,13 @@ const TextColorSwitcher = ({style, children, onPress}) => {
     let textStyle = {...style, color: theme.getColorTheme() === 'light' ? 'black' : 'white'}
 
     return (
-        <Text style = {textStyle} onPress = {()=>{onPress != null ? onPress() : null}}>
+        <Text style = {textStyle} >
             {children}
         </Text>
     );
 };
 
 export default TextColorSwitcher;
-  
+
+
+// onPress = {()=>{onPress !== null ? onPress() : null}}

@@ -115,8 +115,37 @@ const Styles = StyleSheet.create({
       width:60
     },
     menuLogo: {
-      height:50,
-      width:50,
+      height:30,
+      width:30,
+    },
+    searchField: {
+      height:30,
+      borderWidth: 1,
+      backgroundColor: 'white',
+      marginBottom:10,
+    },
+    searchButton: {
+      height: 30,
+      backgroundColor:'#2c3b42',
+      alignItems: 'center',
+      justifyContent:'center',
+      marginBottom:10,
+    },
+    searchResult: {
+      flexDirection: 'row',
+      marginVertical:10
+    },
+    showMoreButtonSearchResults: {
+      width:140,      
+      height:30,
+      backgroundColor:'#2c3b42',
+      alignItems: 'center',
+      justifyContent:'center',
+      marginTop:15
+    },
+    searchResultsInfo: {
+      flex:1,
+      paddingLeft: 8
     }
   });
 
