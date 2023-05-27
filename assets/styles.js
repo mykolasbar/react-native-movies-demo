@@ -24,10 +24,11 @@ const Styles = StyleSheet.create({
     },
     showMoreButton: {
       width:170,
-      height:30,
+      height:40,
       backgroundColor:'#2c3b42',
       alignItems: 'center',
       justifyContent:'center',
+      margin: 12,
     },
     addToWatchlistButton: {
       height:30,
@@ -52,7 +53,7 @@ const Styles = StyleSheet.create({
       maxHeight:420,
     },
     movieScreenContainer: {
-      paddingBottom:30,
+      paddingBottom:50,
     },
     movieDetailsItem: {
       paddingBottom:10
@@ -105,6 +106,7 @@ const Styles = StyleSheet.create({
     },
     input: {
       height: 40,
+      width:170,
       margin: 12,
       borderWidth: 1,
       padding: 10,
@@ -141,7 +143,7 @@ const Styles = StyleSheet.create({
       backgroundColor:'#2c3b42',
       alignItems: 'center',
       justifyContent:'center',
-      marginTop:15
+      marginTop:15,
     },
     searchResultsInfo: {
       flex:1,

@@ -3,6 +3,7 @@ import { Text, View, Button, Image, Dimensions, TouchableOpacity, ScrollView, Li
 import Styles from '../assets/styles';
 import FullPoster from '../components/FullPoster';
 import Player from '../components/Player';
+import BrowseMoviesCategory from '../components/BrowseMoviesCategory.js';
 import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu';
 import { UserContext } from '../components/UserContext';
@@ -21,6 +22,7 @@ const MovieDetails = ({navigation, route}) => {
     const [genres, setGenres] = useState([])
     const [year, setYear] = useState('')
     const [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
+    const [error, setError] = useState(false)
 
     let closeModal = (type) => {
         type === 'player' && showPlayer ? setShowPlayer(false) : null
@@ -32,25 +34,11 @@ const MovieDetails = ({navigation, route}) => {
     }
 
     useEffect(() => {
-        // const dataFetch = async () => {
-        //     const data = await (await fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)).json();
-
-        // setMovieDetails(data);
-        // setYear(data.release_date.split('-')[0])
-        // setGenres(data.genres)
-        // }
-        
-        // dataFetch()
       fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)
       .then((response) => response.json())
       .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0])})
-    }, []);
-
-    useEffect(() => {
-      fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}/videos?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)
-      .then(response => response.json())
-      .then((videos) => {setFirstTrailer(videos.results.find(video => video.type === 'Trailer'))})
-    }, []);
+      .catch((err) => {console.log(err.message); setError(err.message)})
+    }, [route]);
 
     let convertRuntime = (minutes) => {
       let hours = (minutes - minutes % 60)/60
@@ -58,18 +46,11 @@ const MovieDetails = ({navigation, route}) => {
       return hours + ' h. ' + minutes + ' m.'
     }
 
-    // let getYear = (date) => {
-    //   date.split('')
-    //   movieDetails.title.split(' ')
-    //   setYear(date)
-    //   return year
-    //   console.log(date)
-    // }
-
     return (
       <>
         {showFullPoster ? <FullPoster image = {movieDetails.poster_path}  closeModal = {closeModal}/> : null}
-        {showPlayer ? <Player videoId = {firstTrailer.key} closeModal = {closeModal}/> : null}
+        {showPlayer ? <Player filmId = {movieDetails.id} videoId = {firstTrailer.key} closeModal = {closeModal}/> : null}
+        {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
         <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]} horizontal={false}>
           <View style = {Styles.movieScreenContainer}>
             <TextColorSwitcher style = {Styles.movieDetailsHeader}>{movieDetails.original_title}</TextColorSwitcher>
@@ -88,7 +69,9 @@ const MovieDetails = ({navigation, route}) => {
                 <TouchableOpacity onPress = {()=>{openURL(movieDetails.imdb_id)}} style = {Styles.movieDetailsItem}>
                   <Image style = {Styles.IMDBLogo} source = {require('../assets/IMDB_Logo_2016.svg.png')} />
                 </TouchableOpacity>
-                <TextColorSwitcher style = {{fontWeight:'bold', paddingTop: 20}} onPress={() => {setShowPlayer(true)}}>View Trailer</TextColorSwitcher>
+                <TouchableOpacity onPress={() => {setShowPlayer(true)}}>
+                  <TextColorSwitcher style = {{fontWeight:'bold', paddingTop: 20}}>View Trailer</TextColorSwitcher>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={{flex:1}}><TextColorSwitcher style = {Styles.movieDetailsItem}>{movieDetails.overview}</TextColorSwitcher></View>
@@ -98,13 +81,10 @@ const MovieDetails = ({navigation, route}) => {
             >
               <Text>{inWatchlist ? 'REMOVE FROM WATCHLIST' : 'ADD TO WATCHLIST'}</Text>
             </Pressable>
-            <Button
-              style = {{paddingBottom:10}}
-              title="Browse films"
-              onPress={() => navigation.navigate('Browse')}
-            />
+            <TextColorSwitcher style = {Styles.browseScreenHeader}>Recommended titles</TextColorSwitcher>
+            <BrowseMoviesCategory query = {`${route.params.movieInfo.id}/recommendations`} navigation = {navigation}/>
           </View>
-        </ScrollView>
+        </ScrollView>}
         <Menu navigation = {navigation}/>
       </>
     );

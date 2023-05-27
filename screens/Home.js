@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useContext }  from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Pressable } from 'react-native';
 import Styles from '../assets/styles.js'
 import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import { UserContext } from '../components/UserContext.js';
@@ -21,11 +21,13 @@ export default function Home({navigation, route}) {
         <TextColorSwitcher style = { Styles.homeHeader }>Please log in</TextColorSwitcher>
         <TextInput style={Styles.input} placeholder="User name" onChangeText={(text)=>{setUserName(text); console.log(userName)}}></TextInput>
         <TextInput style={Styles.input} placeholder="Password" onChangeText={(text)=>{setPassword(text); console.log(password)}}></TextInput>
-        <Button
-            title="Log in"
+        <Pressable
             // onPress={() => {userName === 'user' && password === 'password' ? (navigation.navigate('Browse'), setShowNotif(false)) : (setShowNotif(true))}}
             onPress={() => {user.setUserName(userName); navigation.navigate('Browse')}}
-        />
+            style = { Styles.showMoreButton }
+        >
+            <TextColorSwitcher>Log in</TextColorSwitcher>
+        </Pressable>
       </View>
      {showNotif && <Text style = {Styles.homeNotif}>Incorrect user name or password</Text>}
     </View>

@@ -17,13 +17,15 @@ const Search = ({navigation}) => {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState()
     const [totalResults, setTotalResults] = useState()
+    const [error, setError] = useState(false)
 
     let handleSearch = (page) => {
         if (query !== null)
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US&query=${query}&page=${page}`)
             .then(response => response.json())
             .then((result) => {setMovies(result.results); setTotalPages(result.total_pages); setTotalResults(result.total_results)})
-    }
+            .catch((err) => {console.log(err.message); setError(err.message)})
+    }       
 
     let getYear = (date) => {
         return date.split('-')[0]
@@ -43,7 +45,8 @@ const Search = ({navigation}) => {
                     </Pressable>
                 </View>
                 <ScrollView style = {Styles.browseRows}>
-                {movies.length !== 0 && 
+                {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
+                movies.length !== 0 && 
                     (totalResults === 0 ? (<TextColorSwitcher>No results</TextColorSwitcher>) : 
                     <View style = {{flexDirection:'column'}}>
                         <View style = {{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
@@ -93,7 +96,6 @@ const Search = ({navigation}) => {
                     </Text>
                 </Pressable>
                     </View>)}
-
             <Menu navigation = {navigation}/>
         </>
     );

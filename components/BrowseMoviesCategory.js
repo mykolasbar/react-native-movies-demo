@@ -3,18 +3,21 @@ import { Text, View, Pressable, Image, ScrollView } from 'react-native';
 import Styles from '../assets/styles';
 import TextColorSwitcher from './TextColorSwitcher';
 
-export default function BrowseMoviesCategory({navigation, query}) {
+export default function BrowseMoviesCategory({navigation, query, route}) {
     const [movies, setMovies] = useState([])
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${query}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US`)
         .then(response => response.json())
         .then(result => setMovies(result.results))
-    }, []);
+        .catch((err) => {console.log(err.message); setError(err.message)})
+    }, [query]);
 
     return (
         <ScrollView horizontal = {true} style = {Styles.browseRows}>
-            {movies.map((movie, index) => 
+            {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
+            movies.map((movie, index) => 
                 <View key = {movie.id} style = {Styles.browseComponent}> 
                     <TextColorSwitcher style = {Styles.browseHeading}>{movie.original_title}</TextColorSwitcher>
                     <Image
@@ -24,7 +27,7 @@ export default function BrowseMoviesCategory({navigation, query}) {
                     />
                     <Pressable
                         style={Styles.showMoreButton}
-                        onPress={() => navigation.navigate('MovieDetails', {movieInfo: movie})}
+                        onPress={() => {navigation.navigate('MovieDetails', {movieInfo: movie}); console.log('test')}}
                     >
                         <Text style = {Styles.buttonText}>MORE INFO</Text>
                     </Pressable>
