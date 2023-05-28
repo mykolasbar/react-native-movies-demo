@@ -22,9 +22,9 @@ A simple front-end Android app for films, made using React Native. Employs The M
     <li>A profile page, whith the user's name, theme switcher and a list of films added to the watchlist and ability to remove them.</li>
     <li>A menu at the bottom of the screen, which allows the user to jump to the browse page, search page and his profile page.</li>
 </ul>
-<img src="./assets/browse.png" alt="App screenshot">
-<img src="./assets/profile.png" alt="App screenshot">
-<img src="./assets/movieinfo.png" alt="App screenshot">
+<img src="browse.png" alt="App screenshot">
+<img src="profile.png" alt="App screenshot">
+<img src="movieinfo.png" alt="App screenshot">
 <h2>Launch Instructions</h2>
 <ol>
     <li>NOTE: you need to have <strong>NPM</strong> dependency manager and <strong>Node.js</strong> installed on your coputer. If you do not have them, you can find instructions for installing them <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target = "_blank">here</a>. You will also need the Expo app on your Android device (can be downloaded from the Google Play app store).</li>
