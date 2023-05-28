@@ -22,7 +22,7 @@ A simple front-end Android app for films, made using React Native. Employs The M
     <li>A profile page, whith the user's name, theme switcher and a list of films added to the watchlist and ability to remove them.</li>
     <li>A menu at the bottom of the screen, which allows the user to jump to the browse page, search page and his profile page.</li>
 </ul>
-<img src="browse.jpg" alt="App screenshot">
+<img src="./assets/browse.jpg" alt="App screenshot">
 <img src="profile.jpg" alt="App screenshot">
 <img src="movieinfo.jpg" alt="App screenshot">
 <h2>Launch Instructions</h2>
