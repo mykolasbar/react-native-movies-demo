@@ -24,12 +24,12 @@ const MovieDetails = ({navigation, route}) => {
     const [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
     const [error, setError] = useState(false)
 
-    let closeModal = (type) => {
+    const closeModal = (type) => {
         type === 'player' && showPlayer ? setShowPlayer(false) : null
         type === 'poster' && showFullPoster ? setShowFullPoster(false) : null
     }
 
-    let openURL = (url) => {
+    const openURL = (url) => {
         Linking.openURL(`https://www.imdb.com/title/${url}`).catch((err) => console.error('An error occurred', err));
     }
 
@@ -40,7 +40,7 @@ const MovieDetails = ({navigation, route}) => {
       .catch((err) => {console.log(err.message); setError(err.message)})
     }, [route]);
 
-    let convertRuntime = (minutes) => {
+    const convertRuntime = (minutes) => {
       let hours = (minutes - minutes % 60)/60
       minutes = minutes % 60
       return hours + ' h. ' + minutes + ' m.'
@@ -82,7 +82,7 @@ const MovieDetails = ({navigation, route}) => {
               <Text>{inWatchlist ? 'REMOVE FROM WATCHLIST' : 'ADD TO WATCHLIST'}</Text>
             </Pressable>
             <TextColorSwitcher style = {Styles.browseScreenHeader}>Recommended titles</TextColorSwitcher>
-            <BrowseMoviesCategory query = {`${route.params.movieInfo.id}/recommendations`} navigation = {navigation}/>
+            <BrowseMoviesCategory query = {`${route.params.movieInfo.id}/similar`} navigation = {navigation}/>
           </View>
         </ScrollView>}
         <Menu navigation = {navigation}/>

@@ -1,7 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
 import Browse from './screens/Browse';
 import MovieDetails from './screens/MovieDetails';
@@ -12,8 +10,8 @@ import BrowseMoviesCategory from './components/BrowseMoviesCategory';
 import Search from './screens/Search';
 import Menu from './components/Menu';
 import TextColorSwitcher from './components/TextColorSwitcher';
-import { UserContext, UserProvider } from './components/UserContext.js';
-import { ThemeContext, ThemeProvider } from './components/ThemeContext';
+import { UserProvider } from './components/UserContext.js';
+import { ThemeProvider } from './components/ThemeContext';
 
 
 const Stack = createNativeStackNavigator();

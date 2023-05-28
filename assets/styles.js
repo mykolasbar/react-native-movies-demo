@@ -6,6 +6,8 @@ const Styles = StyleSheet.create({
       // backgroundColor: '#1c1d1f',
       paddingTop: 20,
       paddingHorizontal: 20,
+      marginBottom:0,
+      paddingBotton:0
     },
     browseHeading: {
       fontWeight:'bold',
@@ -13,7 +15,6 @@ const Styles = StyleSheet.create({
       flexWrap: 'wrap',
       alignItems: 'center',
       justifyContent:'center',
-
     },
     browseComponent: {
       fontSize: "1rem", 
@@ -28,7 +29,6 @@ const Styles = StyleSheet.create({
       backgroundColor:'#2c3b42',
       alignItems: 'center',
       justifyContent:'center',
-      margin: 12,
     },
     addToWatchlistButton: {
       height:30,
@@ -42,6 +42,12 @@ const Styles = StyleSheet.create({
     },
     navigation: {
       backgroundColor: 'rgb(24, 25, 38)',
+      opacity: 0.9,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding:6,
+    },
+    searchNavigation: {
       opacity: 0.9,
       flexDirection: 'row',
       justifyContent: 'space-around',
@@ -97,7 +103,7 @@ const Styles = StyleSheet.create({
     },
     homeContainer: {
       alignSelf: 'center', 
-      marginTop:150
+      marginTop:90
     },
     homeNotif: {
       color:'red', 
@@ -115,6 +121,12 @@ const Styles = StyleSheet.create({
     IMDBLogo: {
       height:20, 
       width:60
+    },
+    menu: {
+      backgroundColor: '#181926', 
+      flexDirection:'row', 
+      padding:12, 
+      justifyContent:'space-between'
     },
     menuLogo: {
       height:30,

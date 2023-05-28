@@ -4,12 +4,10 @@ import { UserContext } from '../components/UserContext';
 import { ThemeContext } from '../components/ThemeContext';
 import Styles from '../assets/styles.js'
 import TextColorSwitcher from '../components/TextColorSwitcher';
-import Watchlist from '../components/Watchlist';
 import Menu from '../components/Menu';
-import ColorSwitcher from '../components/ColorSwitcher';
+import { getYear } from '../components/getYear';
 
 const Search = ({navigation}) => {
-    let user = useContext(UserContext)
     let theme = useContext(ThemeContext)
 
     const [movies, setMovies] = useState([])
@@ -19,7 +17,7 @@ const Search = ({navigation}) => {
     const [totalResults, setTotalResults] = useState()
     const [error, setError] = useState(false)
 
-    let handleSearch = (page) => {
+    const handleSearch = (page) => {
         if (query !== null)
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US&query=${query}&page=${page}`)
             .then(response => response.json())
@@ -27,9 +25,9 @@ const Search = ({navigation}) => {
             .catch((err) => {console.log(err.message); setError(err.message)})
     }       
 
-    let getYear = (date) => {
-        return date.split('-')[0]
-    }
+    // const getYear = (date) => {
+    //     return date.split('-')[0]
+    // }
 
     return (
         <>
@@ -44,7 +42,7 @@ const Search = ({navigation}) => {
                         <Text style = {{color:'white'}}>SEARCH</Text>
                     </Pressable>
                 </View>
-                <ScrollView style = {Styles.browseRows}>
+                <ScrollView style = {[Styles.browseRows, {marginBottom:5}]}>
                 {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
                 movies.length !== 0 && 
                     (totalResults === 0 ? (<TextColorSwitcher>No results</TextColorSwitcher>) : 
@@ -76,10 +74,8 @@ const Search = ({navigation}) => {
                     )}</View>
                     )
                 }
-                </ScrollView>
-            </View>
             {totalPages > 1 &&
-                    (<View style = {Styles.navigation}>
+            (<View style = {Styles.searchNavigation}>
                 <Pressable
                     onPress={() => {setPage(page == 1 ? 1 : page-1); handleSearch(page === 1 ? page : page-1)}}
                 >
@@ -95,7 +91,9 @@ const Search = ({navigation}) => {
                         Next
                     </Text>
                 </Pressable>
-                    </View>)}
+                </View>)}
+                </ScrollView>
+            </View>
             <Menu navigation = {navigation}/>
         </>
     );

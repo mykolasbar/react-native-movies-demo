@@ -14,6 +14,3 @@ const TextColorSwitcher = ({style, children, onPress}) => {
 };
 
 export default TextColorSwitcher;
-
-
-// onPress = {()=>{onPress !== null ? onPress() : null}}

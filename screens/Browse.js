@@ -11,7 +11,7 @@ export default function Browse({navigation}) {
 
   return (
         <>
-        <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]}>
                 <TextColorSwitcher style = {Styles.browseScreenHeader}>Currently Showing <Text 
                         style={Styles.browseScreenLink}
                         onPress={() => navigation.navigate('FullCategoryScreen', {query: 'now_playing', title: 'Currently showing'})}>(View more)</Text></TextColorSwitcher>
