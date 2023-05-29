@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }  from 'react';
-import { Text, View, Button, Image, Dimensions, TouchableOpacity, ScrollView, Linking, Pressable } from 'react-native';
+import { Text, View, Button, Image, Dimensions, TouchableOpacity, ScrollView, Linking, Pressable, Overlay } from 'react-native';
 import Styles from '../assets/styles';
 import FullPoster from '../components/FullPoster';
 import Player from '../components/Player';
@@ -8,6 +8,7 @@ import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu';
 import { UserContext } from '../components/UserContext';
 import { ThemeContext } from '../components/ThemeContext.js';
+import { fetchMovie } from '../components/api.js';
 
 const MovieDetails = ({navigation, route}) => {
     let user = useContext(UserContext)
@@ -21,6 +22,7 @@ const MovieDetails = ({navigation, route}) => {
     const [firstTrailer, setFirstTrailer] = useState({})
     const [genres, setGenres] = useState([])
     const [year, setYear] = useState('')
+    const [posterPath, setPosterPath] = useState('')
     const [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
     const [error, setError] = useState(false)
 
@@ -34,9 +36,8 @@ const MovieDetails = ({navigation, route}) => {
     }
 
     useEffect(() => {
-      fetch(`https://api.themoviedb.org/3/movie/${route.params.movieInfo.id}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)
-      .then((response) => response.json())
-      .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0])})
+      fetchMovie(route.params.movieInfo.id)
+      .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0]), setPosterPath(result.poster_path)})
       .catch((err) => {console.log(err.message); setError(err.message)})
     }, [route]);
 
@@ -51,7 +52,7 @@ const MovieDetails = ({navigation, route}) => {
         {showFullPoster ? <FullPoster image = {movieDetails.poster_path}  closeModal = {closeModal}/> : null}
         {showPlayer ? <Player filmId = {movieDetails.id} videoId = {firstTrailer.key} closeModal = {closeModal}/> : null}
         {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
-        <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]} horizontal={false}>
+        <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white', zIndex:0, position:'relative'}]} horizontal={false}>
           <View style = {Styles.movieScreenContainer}>
             <TextColorSwitcher style = {Styles.movieDetailsHeader}>{movieDetails.original_title}</TextColorSwitcher>
             <View style = {{flexDirection:'row'}}>

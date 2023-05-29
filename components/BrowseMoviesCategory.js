@@ -2,14 +2,14 @@ import React, { useState, useEffect }  from 'react';
 import { Text, View, Pressable, Image, ScrollView } from 'react-native';
 import Styles from '../assets/styles';
 import TextColorSwitcher from './TextColorSwitcher';
+import { fetchCategory } from './api';
 
 export default function BrowseMoviesCategory({navigation, query, route}) {
     const [movies, setMovies] = useState([])
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${query}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US`)
-        .then(response => response.json())
+        fetchCategory(query)
         .then(result => setMovies(result.results))
         .catch((err) => {console.log(err.message); setError(err.message)})
     }, [query]);

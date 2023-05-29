@@ -4,7 +4,8 @@ import Styles from '../assets/styles';
 import TextColorSwitcher from '../components/TextColorSwitcher.js';
 import Menu from '../components/Menu.js';
 import { ThemeContext } from '../components/ThemeContext.js';
-
+import {fetchCategoryFull} from '../components/api.js';
+ 
 export default function FullCategoryScreen({navigation, route}) {
     const [movies, setMovies] = useState([])
     const [page, setPage] = useState(1)
@@ -13,8 +14,7 @@ export default function FullCategoryScreen({navigation, route}) {
     let theme = useContext(ThemeContext)
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${route.params.query}?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US&page=${page}`)
-        .then(response => response.json())
+        fetchCategoryFull(route.params.query, page)
         .then((result) => {setTotalPages(result.total_pages); setMovies(result.results)})
     }, [page]);
 

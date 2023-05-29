@@ -7,7 +7,7 @@ const Styles = StyleSheet.create({
       paddingTop: 20,
       paddingHorizontal: 20,
       marginBottom:0,
-      paddingBotton:0
+      paddingBotton:0,
     },
     browseHeading: {
       fontWeight:'bold',
@@ -80,12 +80,15 @@ const Styles = StyleSheet.create({
     },
     imageModal: {
       width: Dimensions.get('window').width, 
-      height:550, 
-      position:'relative', 
+      height: 550,
+      position:'absolute',
+      zIndex: 100,
       left: 0, 
       right: 0, 
-      bottom: 0, 
-      alignSelf: 'center'
+      bottom: 0,
+      top: 0,
+      alignItems: 'center',
+      backgroundColor:'rgba(0,0,0,0.5)',
     },
     browseScreenHeader: {
       fontSize: 22, 
@@ -160,7 +163,12 @@ const Styles = StyleSheet.create({
     searchResultsInfo: {
       flex:1,
       paddingLeft: 8
-    }
+    },
+    searchResultsTop: {
+      flexDirection:'row', 
+      alignItems:'center', 
+      justifyContent: 'space-between'
+    },
   });
 
 export default Styles;

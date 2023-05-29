@@ -22,8 +22,10 @@ export default function Home({navigation, route}) {
         <TextInput style={Styles.input} placeholder="User name" onChangeText={(text)=>{setUserName(text)}}></TextInput>
         <TextInput style={Styles.input} placeholder="Password" onChangeText={(text)=>{setPassword(text)}}></TextInput>
         <Pressable
-            onPress={() => {user.setUserName(userName); password === 'password' ? (navigation.navigate('Browse'), setShowNotif(false)) : (setShowNotif(true))}}
+            // onPress={() => {user.setUserName(userName); password === 'password' ? (navigation.navigate('Browse'), setShowNotif(false)) : (setShowNotif(true))}}
             style = {[Styles.showMoreButton, {margin:10}]}
+            onPress={() => {navigation.navigate('Browse'), setShowNotif(false)}}
+
         >
             <TextColorSwitcher>Log in</TextColorSwitcher>
         </Pressable>

@@ -3,14 +3,14 @@ import { StyleSheet, Image, Dimensions, Text, View, Overlay, TouchableOpacity } 
 import YoutubeIframe from 'react-native-youtube-iframe';
 import TextColorSwitcher from './TextColorSwitcher';
 import Styles from '../assets/styles';
+import { fetchVideos } from './api';
 
 const Player = (props) => {
     const [firstTrailer, setFirstTrailer] = useState({})
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${props.filmId}/videos?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b`)
-        .then(response => response.json())
+        fetchVideos(props.filmId)
         .then((videos) => {setFirstTrailer(videos.results.find(video => video.type === 'Trailer'))})
         .catch((err) => {console.log(err.message); setError(err.message)})
       }, []);
