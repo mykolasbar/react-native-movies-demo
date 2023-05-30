@@ -17,11 +17,13 @@ const Search = ({navigation}) => {
     const [totalResults, setTotalResults] = useState()
     const [error, setError] = useState(false)
     const [showNavigation, setShowNavigation] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleSearch = (page) => {
         if (query !== null)
+            setLoading(true)
             searchMovies(query, page)
-            .then((result) => {setMovies(result.results); setTotalPages(result.total_pages); setTotalResults(result.total_results)})
+            .then((result) => {setMovies(result.results); setTotalPages(result.total_pages); setTotalResults(result.total_results); setLoading(false)})
             .catch((err) => {setError(err.message)})
         }       
 
@@ -40,6 +42,7 @@ const Search = ({navigation}) => {
                 </View>
                 <ScrollView style = {[Styles.browseRows, {marginBottom:5}]} onMomentumScrollBegin = {()=>{setShowNavigation(true)}}>
                 {error ? <TextColorSwitcher style = {Styles.browseHeading}>Error: {error}</TextColorSwitcher> :
+                loading ? <TextColorSwitcher style = {Styles.browseHeading}>Loading search results...</TextColorSwitcher> :
                     (totalResults == 0 ? 
                         <TextColorSwitcher style = {Styles.browseScreenHeader}>No results</TextColorSwitcher> : 
                         movies.length !== 0 ?

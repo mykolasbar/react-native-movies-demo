@@ -27,7 +27,7 @@ A simple front-end Android app for films, made using React Native. Employs The M
 <img src="./assets/movieinfo.jpg" alt="App screenshot" style = "width:350px">
 <h2>Launch Instructions</h2>
 <ol>
-    <li>NOTE: you need to have <strong>NPM</strong> dependency manager and <strong>Node.js</strong> installed on your coputer. If you do not have them, you can find instructions for installing them <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target = "_blank">here</a>. You will also need the Expo app on your Android device (can be downloaded from the Google Play app store).</li>
+    <li>NOTE: you need to have <strong>NPM</strong> dependency manager and <strong>Node.js</strong> installed on your computer. If you do not have them, you can find instructions for downloading and installing them <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target = "_blank">here</a>. You will also need the Expo Go app on your Android device (can be downloaded from the Google Play app store).</li>
     <li>Download and extract the zip file or pull the repository from the GitHub.</li>
     <li>Run your CLI tool as Administrator, set the current directory to the project's main directory and run 'npm install' to auto-install required dependencies.</li>
     <li>Run npx expo start on your CLI.</li>

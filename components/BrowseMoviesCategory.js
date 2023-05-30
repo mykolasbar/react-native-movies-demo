@@ -7,16 +7,20 @@ import { fetchCategory } from './api';
 export default function BrowseMoviesCategory({navigation, query, route}) {
     const [movies, setMovies] = useState([])
     const [error, setError] = useState(false)
+    const [errMessage, setErrMessage] = useState('')
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         fetchCategory(query)
-        .then(result => setMovies(result.results))
-        .catch((err) => {console.log(err.message); setError(err.message)})
+        .then((result) => {setLoading(false), setMovies(result.results); })
+        .catch((err) => {console.log(err.message); setError(true); setErrMessage(err.message)})
     }, [query]);
 
     return (
         <ScrollView horizontal = {true} style = {Styles.browseRows}>
-            {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
+            {error ? <TextColorSwitcher style = {Styles.browseHeading}>Error: {errMessage}</TextColorSwitcher> :
+            loading ? <TextColorSwitcher style = {Styles.browseHeading}>Loading...</TextColorSwitcher> :  
             movies.map((movie, index) => 
                 <View key = {movie.id} style = {Styles.browseComponent}> 
                     <TextColorSwitcher style = {Styles.browseHeading}>{movie.original_title}</TextColorSwitcher>

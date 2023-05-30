@@ -25,6 +25,8 @@ const MovieDetails = ({navigation, route}) => {
     const [posterPath, setPosterPath] = useState('')
     const [inWatchlist, setInWatchlist] = useState((watchlist.findIndex(film=>route.params.movieInfo.id == film.id) === -1) ? false : true)
     const [error, setError] = useState(false)
+    const [errMessage, setErrMessage] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const closeModal = (type) => {
         type === 'player' && showPlayer ? setShowPlayer(false) : null
@@ -36,9 +38,10 @@ const MovieDetails = ({navigation, route}) => {
     }
 
     useEffect(() => {
+      setLoading(true)
       fetchMovie(route.params.movieInfo.id)
-      .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0]), setPosterPath(result.poster_path)})
-      .catch((err) => {console.log(err.message); setError(err.message)})
+      .then((result) => {setMovieDetails(result); setGenres(result.genres); setYear(result.release_date.split('-')[0]); setPosterPath(result.poster_path); setLoading(false)})
+      .catch((err) => {console.log(err.message); setErrMessage(err.message)})
     }, [route]);
 
     const convertRuntime = (minutes) => {
@@ -51,8 +54,9 @@ const MovieDetails = ({navigation, route}) => {
       <>
         {showFullPoster ? <FullPoster image = {movieDetails.poster_path}  closeModal = {closeModal}/> : null}
         {showPlayer ? <Player filmId = {movieDetails.id} videoId = {firstTrailer.key} closeModal = {closeModal}/> : null}
-        {error ? <TextColorSwitcher style = {Styles.browseHeading}>{error}</TextColorSwitcher> :
         <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white', zIndex:0, position:'relative'}]} horizontal={false}>
+        { error ? <TextColorSwitcher style = {Styles.browseHeading}>Error: {errMessage}</TextColorSwitcher> :  
+          loading ? (<TextColorSwitcher style = {Styles.browseHeading}>Loading...</TextColorSwitcher>) :     
           <View style = {Styles.movieScreenContainer}>
             <TextColorSwitcher style = {Styles.movieDetailsHeader}>{movieDetails.original_title}</TextColorSwitcher>
             <View style = {{flexDirection:'row'}}>
@@ -84,8 +88,8 @@ const MovieDetails = ({navigation, route}) => {
             </Pressable>
             <TextColorSwitcher style = {Styles.browseScreenHeader}>Recommended titles</TextColorSwitcher>
             <BrowseMoviesCategory query = {`${route.params.movieInfo.id}/similar`} navigation = {navigation}/>
-          </View>
-        </ScrollView>}
+          </View>}
+        </ScrollView>
         <Menu navigation = {navigation}/>
       </>
     );

@@ -11,12 +11,17 @@ export default function FullCategoryScreen({navigation, route}) {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState()
     const [showNavigation, setShowNavigation] = useState(false)
+    const [error, setError] = useState(false)
+    const [errMessage, setErrMessage] = useState('')
+    const [loading, setLoading] = useState(false)
 
     let theme = useContext(ThemeContext)
 
     useEffect(() => {
+        setLoading(true)
         fetchCategoryFull(route.params.query, page)
-        .then((result) => {setTotalPages(result.total_pages); setMovies(result.results)})
+        .then((result) => {setTotalPages(result.total_pages); setMovies(result.results); setLoading(false)})
+        .catch((err) => {console.log(err.message); setError(true); setErrMessage(err.message)})
     }, [page]);
 
     let getYear = (date) => {
@@ -26,6 +31,8 @@ export default function FullCategoryScreen({navigation, route}) {
     return (
         <>
             <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]} onMomentumScrollBegin = {()=>{setShowNavigation(true)}}>
+            {error ? (<TextColorSwitcher style = {Styles.browseHeading}>Error: {errMessage}</TextColorSwitcher>) : 
+                loading ? (<TextColorSwitcher style = {Styles.browseHeading}>Loading...</TextColorSwitcher>) : 
                 <View style = {{paddingBottom:20}}>
                     <View style = {{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}><TextColorSwitcher style = {{fontSize: 25, fontWeight: 300, color: "white", paddingBottom: 8}}>{route.params.title}</TextColorSwitcher><TextColorSwitcher>Page: {page}</TextColorSwitcher></View>
                     <View style = {{flexDirection: "row", flexWrap: "wrap"}}>
@@ -61,7 +68,7 @@ export default function FullCategoryScreen({navigation, route}) {
                         </View>
                         )}
                     </View>
-                </View>
+                </View>}
             </ScrollView>
             {showNavigation && <View style = {Styles.navigation}>
                 <Pressable
