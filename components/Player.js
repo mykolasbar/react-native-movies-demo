@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, Dimensions, Text, View, Overlay, TouchableOpacity } from 'react-native';
+import { Dimensions, View, TouchableOpacity } from 'react-native';
 import YoutubeIframe from 'react-native-youtube-iframe';
 import TextColorSwitcher from './TextColorSwitcher';
 import Styles from '../assets/styles';
@@ -13,7 +13,7 @@ const Player = (props) => {
     useEffect(() => {
         fetchVideos(props.filmId)
         .then((videos) => {setFirstTrailer(videos.results.find(video => video.type === 'Trailer'))})
-        .catch((err) => {console.log(err.message); setError(err.message)})
+        .catch((err) => {console.log(err.message); setError(true); setErrMessage(err.message)})
       }, []);
 
     return (

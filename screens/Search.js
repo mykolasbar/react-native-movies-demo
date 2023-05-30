@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect }  from 'react';
+import React, { useContext, useState }  from 'react';
 import { View, ScrollView, TextInput, Pressable, Text, Image } from 'react-native';
-import { UserContext } from '../components/UserContext';
 import { ThemeContext } from '../components/ThemeContext';
 import Styles from '../assets/styles.js'
 import TextColorSwitcher from '../components/TextColorSwitcher';

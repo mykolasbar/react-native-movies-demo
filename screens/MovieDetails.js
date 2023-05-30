@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }  from 'react';
-import { Text, View, Button, Image, Dimensions, TouchableOpacity, ScrollView, Linking, Pressable, Overlay } from 'react-native';
+import { Text, View, Image, TouchableOpacity, ScrollView, Linking, Pressable } from 'react-native';
 import Styles from '../assets/styles';
 import FullPoster from '../components/FullPoster';
 import Player from '../components/Player';
