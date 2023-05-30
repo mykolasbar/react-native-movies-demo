@@ -52,6 +52,7 @@ const Styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       padding:6,
+      // backgroundColor: '#1a0c0e',
     },
     fulCategoryComponent: {
       flexDirection: 'column',

@@ -10,6 +10,7 @@ export default function FullCategoryScreen({navigation, route}) {
     const [movies, setMovies] = useState([])
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState()
+    const [showNavigation, setShowNavigation] = useState(false)
 
     let theme = useContext(ThemeContext)
 
@@ -24,7 +25,7 @@ export default function FullCategoryScreen({navigation, route}) {
 
     return (
         <>
-            <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]}>
+            <ScrollView style={[Styles.container, {backgroundColor: theme.getColorTheme() == 'dark' ? '#1c1d1f' : 'white'}]} onMomentumScrollBegin = {()=>{setShowNavigation(true)}}>
                 <View style = {{paddingBottom:20}}>
                     <View style = {{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}><TextColorSwitcher style = {{fontSize: 25, fontWeight: 300, color: "white", paddingBottom: 8}}>{route.params.title}</TextColorSwitcher><TextColorSwitcher>Page: {page}</TextColorSwitcher></View>
                     <View style = {{flexDirection: "row", flexWrap: "wrap"}}>
@@ -62,7 +63,7 @@ export default function FullCategoryScreen({navigation, route}) {
                     </View>
                 </View>
             </ScrollView>
-            <View style = {Styles.navigation}>
+            {showNavigation && <View style = {Styles.navigation}>
                 <Pressable
                     disapled = {page <= 1 && true}
                     onPress={() => {setPage(page == 1 ? 1 : page-1)}}
@@ -78,7 +79,7 @@ export default function FullCategoryScreen({navigation, route}) {
                         Next
                     </Text>
                 </Pressable>
-            </View>
+            </View>}
             <Menu navigation = {navigation}/>
         </>
     );

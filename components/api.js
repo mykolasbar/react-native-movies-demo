@@ -19,7 +19,6 @@ export const fetchVideos = (filmId) => {
 }
 
 export const searchMovies = (query, page) => {
-    return fetch(`https://api.themoviedbbbb.org/3/search/movie?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&language=en-US&query=${query}&page=${page}`)
+    return fetch(`https://api.themoviedb.org/3/search/movie?api_key=0f4ef1ceadd5dc4b42d00c8efa9fb83b&query=${query}&page=${page}`)
             .then(response => response.json())
-            // .catch((err) => {setError(err.message)})
 }
