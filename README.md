@@ -5,7 +5,7 @@ A simple front-end Android app for films, made using React Native. Employs The M
     <li>Log in screen, where the user can choose his own username.</li>
     <li>Browse screen, where the user can see lists of newest, currently popular and highest-rated films.</li>
     <li>Separate screens for each of the above categories, with the ability to jump to the next page in the results.</li>
-    <li>A detailed info page for each film, which can be accessed from all category lists and serch results, which features:
+    <li>A detailed info page for each film that can be accessed from all category lists and serch results, which features:
         <ul>
             <li>Functionality for enlarging the poster for each film (when clicked on poster).</li>
             <li>Link to film trailer on youtube, which can be opened and played on a modal screen.</li>
