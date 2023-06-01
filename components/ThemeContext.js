@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect }  from 'react';
+import React, { createContext, useState }  from 'react';
 
 export let ThemeContext = createContext()
 
@@ -11,6 +11,8 @@ export let ThemeProvider = ({children}) => {
     let getColorTheme = () => {return theme}
 
     return (
-        <ThemeContext.Provider value={{ setColorTheme, getColorTheme }}>{children}</ThemeContext.Provider>
+        <ThemeContext.Provider value={{ setColorTheme, getColorTheme }}>
+            {children}
+        </ThemeContext.Provider>
     );
 }

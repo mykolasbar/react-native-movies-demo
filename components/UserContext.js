@@ -19,6 +19,8 @@ export let UserProvider = ({children}) => {
     let getWatchlist = () => {return watchlist}
 
     return (
-        <UserContext.Provider value={{ setUserName, getUserName, addToWatchlist, getWatchlist, removeFromWatchlist }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{ setUserName, getUserName, addToWatchlist, getWatchlist, removeFromWatchlist }}>
+            {children}
+        </UserContext.Provider>
     );
 }
